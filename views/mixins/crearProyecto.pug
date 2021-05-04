@@ -1,0 +1,12 @@
+//-VIDEO 49
+//- action=`/nuevo-proyecto/${proyecto.id || ''}` En caso de que alla un ID se le agrega al final del post el ID, de lo contrario queda como /nuevo-proyecto
+//- "value= proyecto.nombre" me auto completa el cuadro de texto
+//- value=`${proyecto.nombre ? 'Guardar' : 'Agregar'}`  Esto hace que si el campo viene vacio muestra el texto agregar, sino si viene con algo, muestra editar.
+mixin crearProyecto(proyecto = {})
+    form.agregar-proyecto(action=`/nuevo-proyecto/${proyecto.id || ''}` method="POST")
+        .campo 
+            label(for="nombre") Nombre Proyecto:
+            input(value= proyecto.nombre type="text" id="nombre" name="nombre"
+            placeholder="Nombre Proyecto")
+        .campo.enviar
+            input(type="submit" value=`${proyecto.nombre ? 'Guardar' : 'Agregar'}` class="boton")

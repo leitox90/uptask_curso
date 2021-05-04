@@ -1,0 +1,41 @@
+extends layout
+
+block contenido
+    .contenido-principal 
+        h1 #{nombrePagina} - #{proyecto.nombre}
+        //- VID 58. POST es para enviar. name="tarea" del imput para poderlo leer en el controlador con BodyParcer. VID 61 Modificaciones.
+        form.agregar-tarea(action=`/proyectos/${proyecto.url}` method="POST")
+            .campo
+                label(for="tarea") Tarea:
+                input.nombre-tarea(type="text" name="tarea" placeholder="Nombre Tarea")
+            .campo.enviar 
+                input.boton.nueva-tarea(type="submit", value="Agregar")
+
+        //-VID 60 y 61, 62
+        .listado-pendientes 
+            ul
+              if tareas.length
+                each tarea in tareas
+                    li.tarea(data-tarea=tarea.id)
+                        p= tarea.tarea
+                        .acciones
+                            if tarea.estado
+                                i.far.fa-check-circle.completo
+                            else
+                                i.far.fa-check-circle
+                            i.fas.fa-trash
+              else 
+                p No hay tareas en este proyecto
+
+        //- pre=vardump(tareas) 
+        //- VID 67
+        //Avance del proyecto
+        .avance
+            h2 Avance del Proyecto
+            #barra-avance.barra-avance
+                #porcentaje.porcentaje
+        //- VID 54 MODFICIACIONES: data-proyecto-url=proyecto.url es un atributo personalizado de htm5
+        // Acciones que se pueden realizar
+        .contenedor-acciones
+            a(href=`/proyecto/editar/${proyecto.id}` class="boton") Editar Proyecto
+            button#eliminar-proyecto(data-proyecto-url=proyecto.url type="button" class="boton eliminar") Eliminar Proyecto

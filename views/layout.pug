@@ -1,0 +1,28 @@
+doctype html
+html(lang="en")
+<!-- Pagina Principal o Master Page hago referencia a /css/normalize y /css/app Lineas 8 y 9. VID 21 y 22. VID 61 Iconos./ MOD VID 69-->
+    head
+        include partials/header
+    body 
+        header.barra <!--barra es una clase que existe en el archivo css VID 22 -->
+            h1 UpTask - Administrador de Proyectos
+            a(href="/cerrar-sesion") Cerrar Sesión
+
+
+        main.contenedor
+            aside.contenedor-proyectos 
+                .panel.crear-proyecto
+                    a(href="/nuevo-proyecto" class="boton") Nuevo Proyecto
+                        span +
+                .panel.lista-proyectos
+                    h2 Proyectos
+                    ul#proyectos.proyectos
+                        if(proyectos.length) 
+                            each proyecto in proyectos
+                                li
+                                    a(href=`/proyectos/${proyecto.url}`)= proyecto.nombre                                   
+            block contenido
+            //-pre= vardump(proyectos) VIDEO 45
+            //- La configuracion sigue en el index del routes.  
+            //-VID 53
+        script(src="/dist/bundle.js")   

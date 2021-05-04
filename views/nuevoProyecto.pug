@@ -1,0 +1,25 @@
+extends layout
+
+//-VIDEO 49
+include mixins/crearProyecto
+
+block contenido
+    .contenido-principal 
+        h1 #{nombrePagina}
+        
+        //-Video 49
+        //- pre=vardump(proyecto) 
+
+        //-Los errores vienen del Controlador. VID 27        
+        if errores
+            each error in errores
+                .alerta.error= error.texto
+        //-VIDEO 49
+        +crearProyecto(proyecto)          
+                
+        //- form.agregar-proyecto(action='/nuevo-proyecto' method="POST") <!--Video 24 y 25 -->
+        //-     .campo <!--Creo un div con la clase campo del app.css--> 
+        //-         label(for="nombre") Nombre Proyecto:
+        //-         input(type="text" id="nombre" name="nombre" placeholder="Nombre Proyecto")
+        //-     .campo.enviar 
+        //-         input(type="submit" value="Agregar" class="boton")
